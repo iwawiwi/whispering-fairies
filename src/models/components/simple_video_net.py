@@ -8,15 +8,9 @@ class VideoConv(nn.Module):
     """VideoCNN
     input: (N, D, C, H, W), need to be reshaped to (N, C, D, H, W)
     """
+
     # init
-    def __init__(
-        self, 
-        in_channels: int = 1, 
-        kernel_size = 3, 
-        stride = 1, 
-        padding = 1, 
-        dilation = 0
-    ):
+    def __init__(self, in_channels: int = 1, kernel_size=3, stride=1, padding=1, dilation=0):
         super().__init__()
         # self.conv1 = nn.Conv3d(in_channels, 8, kernel_size=kernel_size, stride=(2, 1, 1), padding=padding, dilation=dilation)
         # self.relu = nn.ReLU()
@@ -31,16 +25,17 @@ class VideoConv(nn.Module):
         # self.fc1 = nn.Linear(5 * 5 * 14 * 16, 500)
         # self.log_softmax = nn.LogSoftmax(dim=1)
 
-        self.conv1 = nn.Conv3d(in_channels, 8, kernel_size, stride=(2, 1, 1), padding=padding, dilation=dilation)
+        self.conv1 = nn.Conv3d(
+            in_channels, 8, kernel_size, stride=(2, 1, 1), padding=padding, dilation=dilation
+        )
         self.relu = nn.ReLU()
         self.pool1 = nn.MaxPool3d(kernel_size=(1, 4, 4), stride=(1, 4, 4))
         self.fc1 = nn.Linear(2 * 15 * 11 * 11, 500)
 
-
     # forward
     def forward(self, x):
         x = x.transpose(1, 2)
-        
+
         # x = self.pool1(self.relu(self.conv1(x)))
         # x = self.pool2(self.relu(self.conv2(x)))
         # x = self.pool2(self.relu(self.conv3(x)))

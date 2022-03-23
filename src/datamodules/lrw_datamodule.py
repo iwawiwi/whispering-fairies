@@ -1,8 +1,9 @@
 from typing import Optional
 
 from pytorch_lightning import LightningDataModule
-from .components.lrw_dataset import LRWDataset
 from torch.utils.data import DataLoader, Dataset
+
+from .components.lrw_dataset import LRWDataset
 
 
 class LRWDataModule(LightningDataModule):
@@ -41,7 +42,7 @@ class LRWDataModule(LightningDataModule):
 
     @property
     def num_classes(self) -> int:
-        return 500  # FIXME: this is not used? 
+        return 500  # FIXME: this is not used?
 
     def prepare_data(self):
         """Download data if needed.
@@ -61,9 +62,13 @@ class LRWDataModule(LightningDataModule):
 
         # load datasets only if they're not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
-            self.data_train = LRWDataset(self.hparams.data_dir, self.hparams.label_path, phase='train')
-            self.data_val = LRWDataset(self.hparams.data_dir, self.hparams.label_path, phase='val')
-            self.data_test = LRWDataset(self.hparams.data_dir, self.hparams.label_path, phase='test')
+            self.data_train = LRWDataset(
+                self.hparams.data_dir, self.hparams.label_path, phase="train"
+            )
+            self.data_val = LRWDataset(self.hparams.data_dir, self.hparams.label_path, phase="val")
+            self.data_test = LRWDataset(
+                self.hparams.data_dir, self.hparams.label_path, phase="test"
+            )
 
     def train_dataloader(self):
         return DataLoader(

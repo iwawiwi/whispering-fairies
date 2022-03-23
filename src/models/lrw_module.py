@@ -5,6 +5,7 @@ import torch
 from pytorch_lightning import LightningModule
 from torchmetrics import MaxMetric
 from torchmetrics.classification.accuracy import Accuracy
+
 from .components.lrw_net import LRWVideoModel
 
 
@@ -52,11 +53,11 @@ class LRWLitModule(LightningModule):
         return self.net(x)
 
     def step(self, batch: Any):
-        x, y = batch['video'], batch['label']
-        #logger.info(f"video_shape: {x.shape}")
+        x, y = batch["video"], batch["label"]
+        # logger.info(f"video_shape: {x.shape}")
         logits = self.forward(x)
-        #logger.info(f"output_shape: {logits.shape}")
-        #logger.info(f"y_shape: {y.shape}")
+        # logger.info(f"output_shape: {logits.shape}")
+        # logger.info(f"y_shape: {y.shape}")
         loss = self.criterion(logits, y)
         preds = torch.argmax(logits, dim=1)
         return loss, preds, y
