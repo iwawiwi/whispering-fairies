@@ -15,6 +15,7 @@ from ...utils.video_transform import CenterCrop, HorizontalFlip, RandomCrop
 
 jpeg = TurboJPEG()
 
+
 # FIXME: Optimize the implementation
 class LRWDatasetJPEG(Dataset):
 
