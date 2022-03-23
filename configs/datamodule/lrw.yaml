@@ -1,0 +1,7 @@
+_target_: src.datamodules.lrw_datamodule.LRWDataModule
+
+data_dir: ${data_dir}lrw_cropped # data_dir is specified in config.yaml
+label_path: ${data_dir}lrw_labels.txt
+batch_size: 32
+num_workers: 4
+pin_memory: True
