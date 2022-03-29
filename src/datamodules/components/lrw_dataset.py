@@ -10,7 +10,6 @@ import torch
 from torch.utils.data import Dataset
 from turbojpeg import TJPF_GRAY, TurboJPEG
 
-from ...utils.lipreading_utils import read_txt_lines
 from ...utils.video_transform import CenterCrop, HorizontalFlip, RandomCrop
 
 jpeg = TurboJPEG()
